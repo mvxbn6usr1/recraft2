@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install root dependencies
+      run: npm ci
+      
+    - name: Install frontend dependencies
+      run: |
+        cd recraft-dashboard
+        npm ci
+        
+    - name: Install backend dependencies
+      run: |
+        cd recraft-dashboard/backend
+        npm ci
+        
+    - name: Run frontend linting
+      run: |
+        cd recraft-dashboard
+        npm run lint
+        
+    - name: Run backend linting
+      run: |
+        cd recraft-dashboard/backend
+        npm run lint
+        
+    - name: Run frontend tests
+      run: |
+        cd recraft-dashboard
+        npm test
+        
+    - name: Run backend tests
+      run: |
+        cd recraft-dashboard/backend
+        npm test
+        
+    - name: Build frontend
+      run: |
+        cd recraft-dashboard
+        npm run build
+        
+    - name: Build backend
+      run: |
+        cd recraft-dashboard/backend
+        npm run build
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run security audit
+      run: |
+        cd recraft-dashboard
+        npm audit
+        cd backend
+        npm audit 

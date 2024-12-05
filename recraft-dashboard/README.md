@@ -1,149 +1,154 @@
 # Recraft Dashboard
 
-A powerful web application for AI image generation, vectorization, and management with an intuitive user interface.
+A modern web application for interacting with the Recraft AI API, featuring image generation, vectorization, and processing capabilities.
 
 ## Features
 
-### Image Generation
-- Generate images using state-of-the-art AI models
-- Custom style presets for consistent results
-- Real-time progress tracking
-- Adjustable parameters for fine-tuned control
-- Persistent settings across sessions
+- 🎨 Image Generation with customizable parameters
+- 🔄 Image Processing Tools:
+  - Vectorization
+  - Background Removal
+  - Clarity Upscaling
+  - Generative Upscaling
+- 💾 Local Image Storage
+- 🎯 Custom Style Creation
+- 🌓 Dark/Light Mode Support
 
-### Image Management
-- Modern gallery interface with image previews
-- Download functionality for generated images
-- Image metadata viewing and management
-- Prompt and settings reuse functionality
-- Efficient image storage using IndexedDB
+## Tech Stack
 
-### Image Processing
-- Image vectorization capabilities
-- Custom style application
-- Batch processing support
-- Progress tracking for all operations
+### Frontend
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Shadcn UI Components
+- Axios for API communication
 
-### User Interface
-- Clean, modern design with dark mode
-- Responsive layout
-- Intuitive sidebar navigation
-- Modal-based image viewing and actions
-- Smooth animations and transitions
+### Backend
+- Node.js with Express
+- TypeScript
+- Jest for testing
+- PM2 for process management
 
-## Technology Stack
+## Prerequisites
 
-- **Frontend Framework**: React with TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: 
-  - Radix UI for accessible components
-  - Lucide React for icons
-  - Shadcn/ui for styled components
-- **State Management**: React Context API
-- **Storage**: IndexedDB for image data
-- **Build Tool**: Vite
-- **Package Manager**: npm
+- Node.js 18 or higher
+- npm or yarn
+- A Recraft API token
 
-## Getting Started
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm (v7 or higher)
-
-### Installation
+## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/recraft-dashboard.git
-cd recraft-dashboard
+git clone https://github.com/mvxbn6usr1/recraft2.git
+cd recraft2
 ```
 
-2. Install dependencies:
+2. Install dependencies for both frontend and backend:
 ```bash
+# Install root dependencies
+npm install
+
+# Install frontend dependencies
+cd recraft-dashboard
+npm install
+
+# Install backend dependencies
+cd backend
 npm install
 ```
 
-3. Start the development server:
+3. Set up environment variables:
+
+Frontend (.env):
+```env
+VITE_API_BASE_URL=http://localhost:3000/api/v1
+```
+
+Backend (.env):
+```env
+PORT=3000
+RECRAFT_API_TOKEN=your_api_token_here
+CORS_ORIGINS=http://localhost:5173,http://localhost:5174
+```
+
+## Development
+
+1. Start the backend server:
 ```bash
+cd recraft-dashboard/backend
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
-
-### Building for Production
-
-To create a production build:
+2. Start the frontend development server:
 ```bash
+cd recraft-dashboard
+npm run dev
+```
+
+The application will be available at http://localhost:5173 or http://localhost:5174
+
+## Production Deployment
+
+### Backend Deployment
+
+1. Build the backend:
+```bash
+cd recraft-dashboard/backend
 npm run build
 ```
 
-The built files will be in the `dist` directory.
-
-## Project Structure
-
-```
-recraft-dashboard/
-├── src/
-│   ├── components/         # React components
-│   │   ├── ui/            # Reusable UI components
-│   │   └── sidebars/      # Sidebar components
-│   ├── lib/               # Utility functions and services
-│   ├── styles/            # Global styles
-│   ├── App.tsx           # Main application component
-│   └── main.tsx          # Application entry point
-├── public/               # Static assets
-├── index.html           # HTML template
-├── tailwind.config.js   # Tailwind configuration
-├── tsconfig.json        # TypeScript configuration
-└── vite.config.ts       # Vite configuration
+2. Set up environment variables in `.env.production`
+3. Run the deployment script:
+```bash
+./deploy.sh
 ```
 
-## Key Components
+### Frontend Deployment
 
-### Image Storage
-The application uses IndexedDB for efficient image storage, handling both binary data and metadata. This enables fast retrieval and persistent storage of generated images.
+1. Build the frontend:
+```bash
+cd recraft-dashboard
+npm run build
+```
 
-### Style Management
-Custom styles are managed through a dedicated system that allows for:
-- Preset style selection
-- Custom style parameters
-- Style persistence across sessions
+2. Set up environment variables in `.env.production`
+3. Run the deployment script:
+```bash
+./deploy.sh
+```
 
-### User Interface
-The UI is built with accessibility and user experience in mind:
-- Responsive design that works across different screen sizes
-- Keyboard navigation support
-- Clear visual feedback for actions
-- Consistent styling throughout the application
+### Server Configuration
 
-## Development Guidelines
+1. Install required dependencies:
+- Node.js
+- PM2
+- Nginx
 
-### Code Style
-- Use TypeScript for type safety
-- Follow React best practices and hooks guidelines
-- Maintain consistent component structure
-- Use meaningful variable and function names
-- Include appropriate error handling
+2. Set up SSL certificates using Let's Encrypt
+3. Configure Nginx using the provided `nginx.conf`
 
-### State Management
-- Use React Context for global state
-- Implement proper loading states
-- Handle errors gracefully
-- Maintain consistent state updates
+## Testing
 
-### Performance Considerations
-- Optimize image loading and processing
-- Implement proper caching strategies
-- Use lazy loading where appropriate
-- Monitor and optimize bundle size
+Run backend tests:
+```bash
+cd recraft-dashboard/backend
+npm test
+```
+
+Run frontend tests:
+```bash
+cd recraft-dashboard
+npm test
+```
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature-name`
+5. Submit a pull request
 
 ## License
 
@@ -151,8 +156,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- Built with [React](https://reactjs.org/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- UI Components from [Radix UI](https://www.radix-ui.com/)
-- Icons from [Lucide](https://lucide.dev/)
-- Component styling from [shadcn/ui](https://ui.shadcn.com/)
+- [Recraft AI](https://recraft.ai) for providing the image processing API
+- [Shadcn UI](https://ui.shadcn.com) for the beautiful UI components
